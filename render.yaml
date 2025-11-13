@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: student-engagement-ml
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: HOST
+        value: 0.0.0.0
+      - key: MODEL_PATH
+        value: ./models/emotion_model_traced.pt
+      - key: IMAGE_SIZE
+        value: 224
+      - key: EMOTION_LABELS
+        value: neutral,happy,sad,angry,surprised,fearful,disgusted
+      - key: MAX_WORKERS
+        value: 4
